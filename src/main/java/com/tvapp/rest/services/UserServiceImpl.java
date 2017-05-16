@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
  * Created by nimrod_t on 5/15/2017.
  */
 @Service
-public class UserDerviceImpl implements UserService {
-
+public class UserServiceImpl implements UserService {
+    private List<User>
     @Autowired
     private UserRepository userRepository;
 
@@ -19,6 +19,7 @@ public class UserDerviceImpl implements UserService {
     public UserDto signup(UserDto userDto) {
         User user = convertFromDto(userDto);
         userRepository.save(user);
+
         return null;
     }
 
