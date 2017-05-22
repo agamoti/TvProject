@@ -1,19 +1,25 @@
 package dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
+
+import java.sql.Date;
+import java.sql.Time;
 
 /**
  * Created by nimrod_t on 5/15/2017.
  */
+
+
+
 public class UserDto {
     private String email;
     @JsonProperty("user_name")
     private String userName;
     private String password;
-    private boolean login;
-
+    private Boolean login;
     private Long id;
-
 
     public String getEmail() {
         return email;
@@ -39,7 +45,7 @@ public class UserDto {
         this.password = password;
     }
 
-    public boolean isLogin() {return login;}
+    public Boolean isLogin() {return login;}
 
     public void setLogin(boolean login) {
         this.login = login;

@@ -1,6 +1,7 @@
 package com.tvapp.model.entities;
 
 import javax.persistence.*;
+import java.sql.Time;
 
 /**
  * Created by nimrod_t on 5/15/2017.
@@ -17,8 +18,17 @@ public class User {
     private String email;
     private String userName;
     private String password;
-    private boolean login;
+    private Boolean login;
 
+    public Time getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(Time loginTime) {
+        this.loginTime = loginTime;
+    }
+
+    private Time loginTime;
 
     public String getEmail() {
         return email;
@@ -44,7 +54,7 @@ public class User {
         this.password = password;
     }
 
-    public boolean isLogin() {
+    public Boolean isLogin() {
         return login;
     }
 

@@ -5,6 +5,8 @@ import dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+
 
 /**
  * Created by nimrod_t on 5/15/2017.
@@ -15,12 +17,17 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private StatisticService statisticService;
+
+
+
     @Override
     public void logout(UserDto userDto) {
        User user = userRepository.findOne(userDto.getId());
         user.setLogin(false);
         userRepository.save(user);
-
+        statisticService.logOut(userDto);
     }
 
     @Override
@@ -30,6 +37,8 @@ public class UserServiceImpl implements UserService {
             user.setLogin(true);
             userRepository.save(user);
         }
+        statisticService.login(userDto);
+
     }
 
     @Override
@@ -38,6 +47,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         userDto.setId(user.getId());
         userDto.setLogin(true);
+        statisticService.singedUp(userDto);
         return userDto;
     }
 
