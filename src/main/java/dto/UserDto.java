@@ -1,11 +1,6 @@
 package dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.data.redis.core.RedisHash;
-import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
-
-import java.sql.Date;
-import java.sql.Time;
 
 /**
  * Created by nimrod_t on 5/15/2017.
@@ -54,4 +49,11 @@ public class UserDto {
     public Long getId() { return id;}
 
     public void setId(Long id) { this.id = id;}
+
+    public String toString(){
+        return  "User name: " + userName +
+                " password: " + password +
+                " email: " + email +
+                " is login: " + Boolean.toString(isLogin());
+    }
 }

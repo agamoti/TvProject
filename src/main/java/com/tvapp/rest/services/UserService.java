@@ -7,8 +7,11 @@ import dto.UserDto;
  * Created by nimrod_t on 5/15/2017.
  */
 public interface UserService {
+
+    //replace to connect.login(), connect.logout()
     void logout(UserDto userDto);
     void login(UserDto userDto);
     UserDto signup(UserDto userDto);
     User getUserById(Long id);
 }
+

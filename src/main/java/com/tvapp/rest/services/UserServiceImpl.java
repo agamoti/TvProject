@@ -1,16 +1,18 @@
 package com.tvapp.rest.services;
+import com.tvapp.enums.UserStatistics;
 import com.tvapp.model.entities.User;
 import com.tvapp.model.repositories.UserRepository;
 import dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-
 
 /**
  * Created by nimrod_t on 5/15/2017.
  */
+
+
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -27,18 +29,19 @@ public class UserServiceImpl implements UserService {
        User user = userRepository.findOne(userDto.getId());
         user.setLogin(false);
         userRepository.save(user);
-        statisticService.logOut(userDto);
+        userDto.setId(user.getId());
+        statisticService.handleStatisticsAction(userDto, UserStatistics.USER_LOGOUT);
     }
 
     @Override
     public void login(UserDto userDto) {
-    User user = userRepository.findOne(userDto.getId());
+        User user = userRepository.findOne(userDto.getId());
         if(userDto.getPassword().equals(user.getPassword())) {
             user.setLogin(true);
             userRepository.save(user);
+            userDto.setId(user.getId());
+            statisticService.handleStatisticsAction(userDto, UserStatistics.USER_LOGIN);
         }
-        statisticService.login(userDto);
-
     }
 
     @Override
@@ -47,7 +50,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         userDto.setId(user.getId());
         userDto.setLogin(true);
-        statisticService.singedUp(userDto);
+        statisticService.handleStatisticsAction(userDto, UserStatistics.USER_SIGN_UP);
         return userDto;
     }
 
